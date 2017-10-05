@@ -74,6 +74,20 @@ namespace OfficeOpenXml.Table.PivotTable
                 SetXmlNodeString("@n", value);
             }
         }
+        /// <summary>
+        /// A boolean that indicates whether the item is selected when multiple item selection is allowed for the field. Defaults to true.
+        /// </summary>
+        public bool Selected
+        {
+            get
+            {
+                return !GetXmlNodeBool("@h");
+            }
+            internal set
+            {
+                SetXmlNodeBool("@h", !value);
+            }
+        }
         internal int X
         {
             get

@@ -75,32 +75,50 @@ namespace OfficeOpenXml.Table.PivotTable
             {
                 SetXmlNodeString("@name", value);
             }
-        }
-        /***** Dont work. Need items to be populated. ****/
-        ///// <summary>
-        ///// The selected item 
-        ///// </summary>
-        //public int SelectedItem
-        //{
-        //    get
-        //    {
-        //        return GetXmlNodeInt("@item");
-        //    }
-        //    set
-        //    {
-        //        if (value < 0) throw new InvalidOperationException("Can't be negative");
-        //        SetXmlNodeString("@item", value.ToString());
-        //    }
-        //}
-        internal int NumFmtId
+		}
+		/// <summary>
+		/// A boolean that indicates whether multiple item selection is allowed for this field
+		/// </summary>
+		public bool MultipleItemSelectionAllowed
+		{
+			get
+			{
+				return _field.GetXmlNodeBool("@multipleItemSelectionAllowed");
+			}
+			set
+			{
+				_field.SetXmlNodeBool("@multipleItemSelectionAllowed", value);
+				if (!value)
+				{
+					_field.Items.ResetSelection();
+				}
+			}
+		}
+		/***** Dont work. Need items to be populated. ****/
+		///// <summary>
+		///// The selected item 
+		///// </summary>
+		//public int SelectedItem
+		//{
+		//    get
+		//    {
+		//        return GetXmlNodeInt("@item");
+		//    }
+		//    set
+		//    {
+		//        if (value < 0) throw new InvalidOperationException("Can't be negative");
+		//        SetXmlNodeString("@item", value.ToString());
+		//    }
+		//}
+		internal int NumFmtId
         {
             get
             {
-                return GetXmlNodeInt("@numFmtId");
+                return _field.GetXmlNodeInt("@numFmtId");
             }
             set
             {
-                SetXmlNodeString("@numFmtId", value.ToString());
+				_field.SetXmlNodeString("@numFmtId", value.ToString());
             }
         }
         internal int Hier

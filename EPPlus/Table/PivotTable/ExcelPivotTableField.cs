@@ -826,17 +826,17 @@ namespace OfficeOpenXml.Table.PivotTable
             groupItems.AppendChild(s);
         }
         #endregion
-        internal ExcelPivotTableFieldCollectionBase<ExcelPivotTableFieldItem> _items=null;
+        internal ExcelPivotTableFieldItemCollection _items =null;
         /// <summary>
         /// Pivottable field Items. Used for grouping.
         /// </summary>
-        public ExcelPivotTableFieldCollectionBase<ExcelPivotTableFieldItem> Items
+        public ExcelPivotTableFieldItemCollection Items
         {
             get
             {
                 if (_items == null)
                 {
-                    _items = new ExcelPivotTableFieldCollectionBase<ExcelPivotTableFieldItem>(_table);
+                    _items = new ExcelPivotTableFieldItemCollection(_table);
                     foreach (XmlNode node in TopNode.SelectNodes("d:items//d:item", NameSpaceManager))
                     {
                         var item = new ExcelPivotTableFieldItem(NameSpaceManager, node,this);

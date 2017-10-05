@@ -319,4 +319,91 @@ namespace OfficeOpenXml.Table.PivotTable
             _list.Remove(dataField);
         }
     }
+    /// <summary>
+    /// Collection class for data field items in a PivotTable
+    /// </summary>
+    public class ExcelPivotTableFieldItemCollection : ExcelPivotTableFieldCollectionBase<ExcelPivotTableFieldItem>
+    {
+        internal ExcelPivotTableFieldItemCollection(ExcelPivotTable table) :
+            base(table)
+        {
+
+        }
+        /// <summary>
+        /// Deselect a field item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Deselect(ExcelPivotTableFieldItem item)
+        {
+            if (!_list.Contains(item))
+            {
+                throw new ArgumentException("Item not in collection");
+            }
+            item.Selected = false;
+        }
+		/// <summary>
+		/// Deselect a field item at a specific position.
+		/// </summary>
+		/// <param name="index">The zero-based index of the element to remove.</param>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <c>index</c> is less than 0.
+		/// -or-
+		/// <c>index</c> is equal to or greater than <see cref="ExcelPivotTableFieldCollectionBase{T}.Count"/>
+		/// </exception>
+		public void DeselectAt(int index)
+        {
+            if (index < 0 || index >= _list.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            _list[index].Selected = false;
+        }
+        /// <summary>
+        /// Select a field item
+        /// </summary>
+        /// <param name="item"></param>
+        public void Select(ExcelPivotTableFieldItem item)
+        {
+            if (!_list.Contains(item))
+            {
+                throw new ArgumentException("Item not in collection");
+            }
+            item.Selected = true;
+        }
+		/// <summary>
+		/// Select a field item at a specific position
+		/// </summary>
+		/// <param name="index">The zero-based index of the element to remove.</param>
+		/// <exception cref="ArgumentOutOfRangeException">
+		/// <c>index</c> is less than 0.
+		/// -or-
+		/// <c>index</c> is equal to or greater than <see cref="ExcelPivotTableFieldCollectionBase{T}.Count"/>
+		/// </exception>
+		public void SelectAt(int index)
+        {
+            if (index < 0 || index >= _list.Count)
+            {
+                throw new ArgumentOutOfRangeException(nameof(index));
+            }
+            _list[index].Selected = true;
+        }
+        /// <summary>
+        /// Select all field items.
+        /// </summary>
+        public void SelectAll()
+        {
+            foreach (ExcelPivotTableFieldItem item in _list)
+            {
+                item.Selected = true;
+            }
+        }
+        /// <summary>
+        /// Reset the selection of all field items.
+        /// </summary>
+        /// <remarks>Internally it just calls <see cref="SelectAll"/>.</remarks>
+        public void ResetSelection()
+        {
+            SelectAll();
+        }
+    }
 }
